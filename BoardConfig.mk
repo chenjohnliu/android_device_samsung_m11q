@@ -154,6 +154,11 @@ TARGET_ENABLE_MEDIADRM_64 := true
 
 # NFC
 NXP_CHIP_TYPE := pn553
+ODM_MANIFEST_SKUS := hce hceese hcesim hcesimese
+ODM_MANIFEST_HCE_FILES := device/samsung/m11q/configs/nfc/vintf/manifest_hce.xml
+ODM_MANIFEST_HCEESE_FILES := device/samsung/m11q/configs/nfc/vintf/manifest_hceese.xml
+ODM_MANIFEST_HCESIM_FILES := device/samsung/m11q/configs/nfc/vintf/manifest_hcesim.xml
+ODM_MANIFEST_HCESIMESE_FILES := device/samsung/m11q/configs/nfc/vintf/manifest_hcesimese.xml
 
 # Graphics
 TARGET_USES_GRALLOC1 := true

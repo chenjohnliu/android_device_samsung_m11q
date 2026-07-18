@@ -35,6 +35,7 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1560
 TARGET_SCREEN_WIDTH := 720
+TARGET_BOOT_ANIMATION_RES := 720
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
@@ -322,9 +323,15 @@ PRODUCT_PACKAGES += \
     vendor.nxp.nxpese@1.0:32 \
     vendor.nxp.nxpnfc@1.0:32
 
-#PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/permissions/,$(TARGET_COPY_OUT_ODM)/etc/permissions) \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/vintf/,$(TARGET_COPY_OUT_ODM)/etc/vintf)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/nfc/vintf/manifest_hcesim.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.xml \
+    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.hce.xml \
+    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.hcef.xml \
+    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.uicc.xml \
+    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/com.android.nfc_extras.xml
 
 # IRSC
 PRODUCT_COPY_FILES += \
