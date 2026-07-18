@@ -1,0 +1,7 @@
+[
+   {
+      "repository": "LineageOS/android_hardware_samsung",
+      "target_path": "hardware/samsung",
+      "branch": "lineage-20"
+   }
+]
