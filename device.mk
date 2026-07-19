@@ -75,6 +75,9 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.qti.fm.sh
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init.fts_gesture.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.fts_gesture.rc
+
 # Recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:root/init.recovery.qcom.rc

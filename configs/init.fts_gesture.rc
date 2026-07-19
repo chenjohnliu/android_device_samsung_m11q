@@ -1,0 +1,2 @@
+on boot
+    write /sys/devices/platform/soc/78b7000.spi/spi_master/spi3/spi3.1/fts_gesture_mode 1
