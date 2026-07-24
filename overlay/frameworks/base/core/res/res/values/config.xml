@@ -295,18 +295,15 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>6</item>
-        <item>6</item>
-        <item>6</item>
-        <item>11</item>
-        <item>79</item>
-        <item>95</item>
-        <item>141</item>
-        <item>183</item>
-        <item>200</item>
-        <item>219</item>
-        <item>255</item>
-        <item>255</item>
+        <item>3</item>
+        <item>35</item>
+        <item>53</item>
+        <item>60</item>
+        <item>65</item>
+        <item>77</item>
+        <item>112</item>
+        <item>174</item>
+        <item>235</item>
         <item>255</item>
     </integer-array>
 
@@ -332,17 +329,14 @@
          Zone N + 1     array[N] <= LUX < infinity
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>5</item>
-        <item>6</item>
-        <item>50</item>
-        <item>100</item>
-        <item>500</item>
-        <item>1500</item>
-        <item>3000</item>
-        <item>4999</item>
-        <item>5000</item>
-        <item>19999</item>
-        <item>20000</item>
+            <item>20</item>
+            <item>50</item>
+            <item>100</item>
+            <item>200</item>
+            <item>400</item>
+            <item>1000</item>
+            <item>2000</item>
+            <item>3000</item>
+            <item>5000</item>
     </integer-array>
 </resources>
