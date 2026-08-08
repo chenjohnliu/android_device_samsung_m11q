@@ -1,1 +1,2 @@
 type hal_miscpower_hwservice, hwservice_manager_type;
+type ff_hwservice, hwservice_manager_type;

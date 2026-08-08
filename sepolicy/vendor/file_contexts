@@ -35,3 +35,12 @@
 /(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.miscpower@2\.0-service	u:object_r:hal_power_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.vibrator@2\.2-service		u:object_r:hal_vibrator_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power-service-qti-m11q            u:object_r:hal_power_default_exec:s0
+
+# Fingerprint
+/dev/focaltech_fp									u:object_r:ff_device:s0
+/dev/silead_fp										u:object_r:silead_fpd_device:s0
+/dev/silead_stub									u:object_r:silead_fpd_device:s0
+/data/vendor/focaltech(/.*)?								u:object_r:ff_data_file:s0
+/data/vendor/silead(/.*)?								u:object_r:silead_fpd_data_file:s0
+/(vendor|system/vendor)/bin/hw/vendor\.focaltech\.fingerprint@1\.0-service		u:object_r:hal_fingerprint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.silead\.hardware\.fingerprintext@1\.0-service	u:object_r:hal_fingerprint_default_exec:s0

@@ -1,0 +1,16 @@
+# Focaltech
+allow hal_fingerprint_default ff_device:chr_file rw_file_perms;
+allow hal_fingerprint_default ff_data_file:dir create_dir_perms;
+allow hal_fingerprint_default ff_data_file:file create_file_perms;
+allow hal_fingerprint_default ff_hwservice:hwservice_manager { add find };
+
+# Silead
+allow hal_fingerprint_default silead_fpd_device:chr_file rw_file_perms;
+allow hal_fingerprint_default silead_fpd_data_file:dir create_dir_perms;
+allow hal_fingerprint_default silead_fpd_data_file:file create_file_perms;
+
+# TrustZone / ion
+allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
+allow hal_fingerprint_default ion_device:chr_file rw_file_perms;
+allow hal_fingerprint_default firmware_file:dir search;
+allow hal_fingerprint_default firmware_file:file r_file_perms;

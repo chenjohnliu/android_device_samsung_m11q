@@ -6,3 +6,7 @@ type wifi_efs_file, file_type, mlstrustedobject;
 
 # Persist
 type persist_wifi_file, file_type;
+
+# Fingerprint
+type ff_data_file, data_file_type, file_type;
+type silead_fpd_data_file, data_file_type, file_type;
