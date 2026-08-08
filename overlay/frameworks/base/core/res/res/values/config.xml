@@ -339,4 +339,8 @@
             <item>3000</item>
             <item>5000</item>
     </integer-array>
+
+    <string-array name="config_biometric_sensors" translatable="false">
+	    <item>0:2:15</item>
+    </string-array>
 </resources>
