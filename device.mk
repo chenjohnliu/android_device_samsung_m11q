@@ -327,14 +327,7 @@ PRODUCT_PACKAGES += \
     vendor.nxp.nxpnfc@1.0:32
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/nfc/vintf/manifest_hcesim.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.xml \
-    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.hce.xml \
-    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.hcef.xml \
-    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.nfc.uicc.xml \
-    $(LOCAL_PATH)/configs/nfc/permissions/sku_hcesim/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/com.android.nfc_extras.xml
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/permissions/,$(TARGET_COPY_OUT_ODM)/etc/permissions)
 
 # IRSC
 PRODUCT_COPY_FILES += \
