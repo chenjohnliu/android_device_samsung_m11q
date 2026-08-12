@@ -7,3 +7,5 @@ type sec_efs_block_device, dev_type;
 type steady_block_device, dev_type;
 type ff_device, dev_type;
 type silead_fpd_device, dev_type;
+type omr_block_device, dev_type;
+type keydata_block_device, dev_type;

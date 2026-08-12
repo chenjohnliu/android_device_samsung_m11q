@@ -10,7 +10,6 @@ on early-init
 on fs
     wait /dev/block/bootdevice/by-name/sec_efs
     mount ext4 /dev/block/bootdevice/by-name/sec_efs /efs noatime nosuid nodev barrier=1
-    restorecon_recursive /efs
     wait /dev/block/bootdevice/by-name/efs
     mount ext4 /dev/block/bootdevice/by-name/efs /mnt/vendor/efs noatime nosuid nodev barrier=1
     restorecon_recursive /mnt/vendor/efs

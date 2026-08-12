@@ -159,3 +159,5 @@ ro.vendor.fingerprintUI=1
 ro.vendor.hq.project.name=HS71
 vendor.hw.fm.init=0
 ro.camera.notify_nfc=1
+ro.vendor.multisim.simslotcount=2
+persist.radio.multisim.config=dsds

@@ -1,0 +1,6 @@
+type btcoex_cont_config, domain;
+type btcoex_cont_config_exec, exec_type, vendor_file_type, file_type;
+
+dontaudit btcoex_cont_config default_prop:file { getattr open read map };
+
+init_daemon_domain(btcoex_cont_config)

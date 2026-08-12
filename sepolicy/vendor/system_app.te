@@ -1,3 +1,7 @@
 dontaudit system_app system_suspend_control_service:service_manager find;
+dontaudit system_app proc_vmallocinfo:file read;
+dontaudit system_app proc_pagetypeinfo:file read;
+dontaudit system_app qemu_hw_prop:file read;
+dontaudit system_app vendor_default_prop:file { getattr open read map };
 
 r_dir_file(system_app, sysfs_zram);

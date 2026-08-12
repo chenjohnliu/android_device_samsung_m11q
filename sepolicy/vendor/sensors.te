@@ -1,0 +1,2 @@
+allow sensors sysfs_hw_info:file r_file_perms;
+allow sensors sysfs_hw_info:dir search;

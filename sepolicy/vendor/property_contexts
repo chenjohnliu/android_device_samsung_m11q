@@ -2,3 +2,9 @@ persist.vendor.camera.	u:object_r:sec_camera_prop:s0
 vendor.bluetooth_fw_ver	u:object_r:vendor_bluetooth_prop:s0
 vendor.sys.qseecomd.	u:object_r:qseecom_prop:s0
 vendor.wlan.			u:object_r:vendor_wifi_prop:s0
+persist.vendor.runin.fp			u:object_r:vendor_fingerprint_prop:s0
+vendor.camera.				u:object_r:sec_camera_prop:s0
+vendor.calls.slotid			u:object_r:vendor_ril_prop:s0
+persist.ril.interfaceconf.failed	u:object_r:vendor_ril_prop:s0
+persist.radio.psensor.			u:object_r:vendor_sensor_prop:s0
+persist.vendor.nfc.			u:object_r:vendor_nfc_prop:s0

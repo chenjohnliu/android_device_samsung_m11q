@@ -1,3 +1,7 @@
 vendor_internal_prop(qseecom_prop)
-vendor_internal_prop(sec_camera_prop)
+vendor_public_prop(sec_camera_prop)
 vendor_internal_prop(vendor_wifi_prop)
+vendor_internal_prop(vendor_fingerprint_prop)
+vendor_internal_prop(vendor_ril_prop)
+vendor_internal_prop(vendor_nfc_prop)
+vendor_restricted_prop(vendor_sensor_prop)

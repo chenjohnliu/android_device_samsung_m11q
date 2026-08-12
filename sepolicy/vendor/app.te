@@ -1,3 +1,4 @@
 allow vendor_fm_app fm_radio_device:chr_file rw_file_perms;
 dontaudit vendor_fm_app { ctl_start_prop ctl_stop_prop }:property_service set;
 set_prop(vendor_fm_app, vendor_fm_prop)
+get_prop(appdomain, sec_camera_prop)
