@@ -153,6 +153,9 @@ on property:vendor.audio.spkflag=true
     write /sys/bus/i2c/drivers/aw882xx_smartpa/2-0034/calibration ${vendor.audio.spkcal}
 # HS70-24 aw read cal value by xuyuqing at 2019/11/04 end
 
+on property:vendor.hw.fm.mode=*
+   start vendor.fm
+
 on property:sys.boot_completed=1
    start qrngp
 
