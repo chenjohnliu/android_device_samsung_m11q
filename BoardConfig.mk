@@ -82,12 +82,6 @@ BOARD_MKBOOTIMG_ARGS += \
 	--header_version $(BOARD_BOOT_HEADER_VERSION) \
 	--dtb $(TARGET_PREBUILT_DTB)
 
-# Kernel - prebuilt
-TARGET_FORCE_PREBUILT_KERNEL := true
-ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-endif
-
 # Kernel config
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
