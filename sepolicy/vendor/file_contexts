@@ -9,7 +9,6 @@
 /dev/block/platform/soc/7824900\.sdhci/by-name/dsp			u:object_r:dsp_block_device:s0
 /dev/block/platform/soc/7824900\.sdhci/by-name/dtbo			u:object_r:boot_block_device:s0
 /dev/block/platform/soc/7824900\.sdhci/by-name/efs			u:object_r:efs_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/hideen		u:object_r:hidden_block_device:s0
 /dev/block/platform/soc/7824900\.sdhci/by-name/param		u:object_r:param_block_device:s0
 /dev/block/platform/soc/7824900\.sdhci/by-name/persistent	u:object_r:frp_block_device:s0
 /dev/block/platform/soc/7824900\.sdhci/by-name/sec_efs		u:object_r:sec_efs_block_device:s0
