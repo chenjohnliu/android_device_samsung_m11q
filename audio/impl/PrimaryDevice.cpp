@@ -213,37 +213,7 @@ Return<Result> PrimaryDevice::setVoiceVolume(float volume) {
 }
 
 Return<Result> PrimaryDevice::setMode(AudioMode mode) {
-    /* On stock ROM Samsung sets the g_call_state and g_call_sim_slot audio parameters
-     * in the framework, breaking it on AOSP ROMs. For the audio params call_state and
-     * g_call_state 2 corresponds to CALL_ACTIVE and 1 to CALL_INACTIVE respectively.
-     * For the g_call_sim_slot parameter 0x01 describes SIM1 and 0x02 SIM2.
-     */
-
-    char simSlot[92];
-
-    // This prop returns either -1 (no SIM is calling),
-    // 0 (SIM1 is calling) or 1 (SIM2 is calling)
-    property_get("vendor.calls.slotid", simSlot, "");
-
-    // Wait until RIL reports which SIM is being used
-    while (strcmp(simSlot, "-1") == 0 && mode == AudioMode::IN_CALL) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        property_get("vendor.calls.slotid", simSlot, "");
-    }
-
-    if (strcmp(simSlot, "0") == 0) {
-        // SIM1
-        mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x01");
-    } else if (strcmp(simSlot, "1") == 0) {
-        // SIM2
-        mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x02");
-    } else if (strcmp(simSlot, "-1") == 0) {
-        // No call
-        mDevice->halSetParameters("call_state=1;g_call_state=1");
-    }
-
-    // INVALID, CURRENT, CNT, MAX are reserved for internal use.
-    // TODO: remove the values from the HIDL interface
+    // Reject reserved values before reading properties or changing vendor state.
     switch (mode) {
         case AudioMode::NORMAL:
         case AudioMode::RINGTONE:
@@ -252,10 +222,55 @@ Return<Result> PrimaryDevice::setMode(AudioMode mode) {
 #if MAJOR_VERSION >= 6
         case AudioMode::CALL_SCREEN:
 #endif
-            break;  // Valid values
+            break;
         default:
             return Result::INVALID_ARGUMENTS;
-    };
+    }
+
+    /* On stock ROM Samsung sets the g_call_state and g_call_sim_slot audio parameters
+     * in the framework, breaking it on AOSP ROMs. For the audio params call_state and
+     * g_call_state 2 corresponds to CALL_ACTIVE and 1 to CALL_INACTIVE respectively.
+     * For the g_call_sim_slot parameter 0x01 describes SIM1 and 0x02 SIM2.
+     */
+
+    char simSlot[PROPERTY_VALUE_MAX];
+
+    // This prop returns either -1 (no SIM is calling),
+    // 0 (SIM1 is calling) or 1 (SIM2 is calling)
+    property_get("vendor.calls.slotid", simSlot, "");
+
+    if (mode == AudioMode::IN_CALL) {
+        // RIL may publish the slot after this synchronous mode request, or never
+        // publish it for an IMS call. Do not hold up the audio service indefinitely.
+        const auto deadline = std::chrono::steady_clock::now() +
+                              std::chrono::milliseconds(200);
+        while (strcmp(simSlot, "0") != 0 && strcmp(simSlot, "1") != 0) {
+            const auto now = std::chrono::steady_clock::now();
+            if (now >= deadline) break;
+            const auto nextPoll = now + std::chrono::milliseconds(50);
+            std::this_thread::sleep_until(nextPoll < deadline ? nextPoll : deadline);
+            property_get("vendor.calls.slotid", simSlot, "");
+        }
+
+        if (strcmp(simSlot, "0") == 0) {
+            mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x01");
+        } else if (strcmp(simSlot, "1") == 0) {
+            mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x02");
+        } else {
+            // Stage 1 is deliberately SIM1-only. Samsung IMS calls do not make
+            // the patched RIL slot property available before this mode request,
+            // so use the existing SIM1 sequence instead of leaving the modem
+            // voice use-case inactive. Do not extend this fallback to DSDS
+            // without an explicit call-slot signal.
+            ALOGW("Call slot unavailable (%s); applying Stage1 SIM1 IMS audio fallback",
+                  simSlot);
+            mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x01");
+        }
+    } else if (mode == AudioMode::NORMAL || strcmp(simSlot, "-1") == 0) {
+        // NORMAL always tears down call state, even if RIL left a stale slot.
+        // Preserve the inactive notification for other modes with no reported call.
+        mDevice->halSetParameters("call_state=1;g_call_state=1");
+    }
 
     return mDevice->analyzeStatus(
         "set_mode",
