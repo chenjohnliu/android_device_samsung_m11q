@@ -5,4 +5,6 @@ vendor.samsung.hardware.vibrator::ISehVibrator		u:object_r:hal_vibrator_hwservic
 vendor.focaltech.fingerprint::IFocalFingerprintService		u:object_r:ff_hwservice:s0
 vendor.silead.hardware.fingerprintext::ISileadFingerprint	u:object_r:hal_fingerprint_hwservice:s0
 vendor.samsung.hardware.radio::ISehRadio			u:object_r:hal_telephony_hwservice:s0
+vendor.samsung.hardware.radio.channel::ISehChannel	u:object_r:hal_telephony_hwservice:s0
+vendor.samsung.hardware.radio.bridge::ISehBridge	u:object_r:hal_telephony_hwservice:s0
 vendor.nxp.nxpnfc::INxpNfc					u:object_r:hal_nfc_hwservice:s0

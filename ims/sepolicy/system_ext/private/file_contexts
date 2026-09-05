@@ -1,0 +1,5 @@
+/system_ext/bin/imsd                                                 u:object_r:imsd_exec:s0
+/system/system_ext/bin/imsd                                          u:object_r:imsd_exec:s0
+/dev/socket/imsd                                                     u:object_r:imsd_socket:s0
+/system_ext/bin/multiclientd                                         u:object_r:m11q_multiclient_exec:s0
+/system/system_ext/bin/multiclientd                                  u:object_r:m11q_multiclient_exec:s0

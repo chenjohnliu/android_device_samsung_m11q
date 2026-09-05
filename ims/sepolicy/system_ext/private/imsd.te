@@ -1,0 +1,16 @@
+type imsd, domain, coredomain, mlstrustedsubject;
+type imsd_exec, exec_type, file_type, system_file_type;
+type imsd_socket, file_type, mlstrustedobject;
+
+init_daemon_domain(imsd)
+net_domain(imsd)
+
+# Match the two Linux capabilities present in the stock init contract.
+allow imsd self:capability { net_admin net_raw };
+
+# The helper is an IPsec/PF_KEY daemon. Keep this limited to its own sockets;
+# further device/property/file access must come from a labelled runtime denial.
+allow imsd self:key_socket create_socket_perms_no_ioctl;
+allow imsd self:netlink_xfrm_socket create_socket_perms_no_ioctl;
+allow imsd self:unix_stream_socket { accept getattr getopt listen read setopt shutdown write };
+allow imsd imsd_socket:sock_file { getattr read write };

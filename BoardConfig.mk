@@ -220,6 +220,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 # SELinux
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+# Keep IMS platform policy in the supported system_ext-private policy input.
+include device/samsung/m11q/ims/sepolicy.mk
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true

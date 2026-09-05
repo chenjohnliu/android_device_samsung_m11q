@@ -1,0 +1,24 @@
+# Exact M115F OEM IMS socket provider; no modem device or IP networking access.
+# IMS app is s0:c512,c768 (BF capture), while init daemons run at s0.
+# MLS trust permits this cross-level stream connection; TE still restricts peers.
+type m11q_multiclient, domain, coredomain, mlstrustedsubject;
+type m11q_multiclient_exec, exec_type, file_type, system_file_type;
+init_daemon_domain(m11q_multiclient)
+
+# Stock daemon uses the existing Samsung bridge@2.0 telephony HAL and callbacks.
+hwbinder_use(m11q_multiclient)
+hal_client_domain(m11q_multiclient, hal_telephony)
+
+# Multiclient is an abstract socket, not a /dev/socket filesystem entry.
+allow m11q_multiclient self:unix_stream_socket create_socket_perms_no_ioctl;
+allow m11q_multiclient self:unix_stream_socket { listen accept };
+allow samsung_ims_app m11q_multiclient:unix_stream_socket connectto;
+
+# Stock SO_PEERCRED gate reads /proc/<peer-pid>/cmdline and admits
+# com.sec.imsservice with app_id 1000. Restrict proc access to this peer domain.
+allow m11q_multiclient samsung_ims_app:dir search;
+allow m11q_multiclient samsung_ims_app:file { open read getattr };
+
+# SehBridgeIndication::openFd serves Samsung RIL's fast-dormancy files. Runtime
+# currently proves only directory traversal is denied; add no file access yet.
+allow m11q_multiclient radio_data_file:dir search;

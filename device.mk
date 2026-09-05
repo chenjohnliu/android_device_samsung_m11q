@@ -403,3 +403,9 @@ PRODUCT_COPY_FILES += \
 
 # Call the proprietary setup
 $(call inherit-product, vendor/samsung/m11q/m11q-vendor.mk)
+
+# M115F IMS Stage 1A/1B: package/signing, private ARM32 native payload and
+# the stock imsd helper. Later IMS peers and the Android 13 facade remain
+# intentionally deferred until the package/native gates pass.
+
+$(call inherit-product, device/samsung/m11q/ims/ims.mk)

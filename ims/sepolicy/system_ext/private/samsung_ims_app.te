@@ -1,0 +1,53 @@
+type samsung_ims_app, domain, coredomain;
+type samsung_ims_app_data_file, file_type, data_file_type, core_data_file_type, app_data_file_type;
+
+app_domain(samsung_ims_app)
+net_domain(samsung_ims_app)
+binder_use(samsung_ims_app)
+hwbinder_use(samsung_ims_app)
+hal_client_domain(samsung_ims_app, hal_telephony)
+
+# The IMS core publishes the three services observed on M115F stock.
+add_service(samsung_ims_app, samsung_ims_service)
+add_service(samsung_ims_app, samsung_secims_service)
+add_service(samsung_ims_app, samsung_imsbase_service)
+
+# Telephony owns lifecycle calls and receives callbacks.
+binder_call(samsung_ims_app, system_server)
+binder_call(system_server, samsung_ims_app)
+# ActivityThread pre-attach must find the framework activity service.
+allow samsung_ims_app activity_service:service_manager find;
+# Phone-state listener registration looks up the telephony registry service.
+allow samsung_ims_app registry_service:service_manager find;
+# PowerManager construction also fetches the A13 thermal service.
+allow samsung_ims_app thermal_service:service_manager find;
+# Subscription, SIM operator, and device identity queries use telephony Binder services.
+allow samsung_ims_app radio_service:service_manager find;
+# GeolocationController initialization looks up the framework location service.
+allow samsung_ims_app location_service:service_manager find;
+# Native VoLTE call setup uses AudioSystem/AudioFlinger. Without this lookup,
+# its IMS worker repeatedly waits and cannot consume the carrier's INVITE 200.
+allow samsung_ims_app audioserver_service:service_manager find;
+# ToneGenerator AudioTrack creation reports metrics during IMS call setup.
+# Denial blocks the IMS worker in a ten-second ServiceManager retry.
+allow samsung_ims_app mediametrics_service:service_manager find;
+
+# SimManager writes only the exact sys.smf.mnoname<slot> property family.
+set_prop(samsung_ims_app, m11q_ims_prop)
+# RegistrationUtils publishes only the two exact per-slot MMTEL support properties.
+set_prop(samsung_ims_app, m11q_ims_supportmmtel_prop)
+# IilManager publishes only the exact legacy Samsung emergency-timer property.
+set_prop(samsung_ims_app, m11q_twwan911_prop)
+
+# Provider startup reads, traverses, and writes its own application data directory.
+allow samsung_ims_app samsung_ims_app_data_file:dir {
+    getattr search write add_name create setattr remove_name
+};
+allow samsung_ims_app samsung_ims_app_data_file:file {
+    create read getattr open write rename unlink setattr lock ioctl
+};
+binder_call(samsung_ims_app, radio)
+binder_call(radio, samsung_ims_app)
+
+# Stock Java IMS core talks to the init-created imsd stream socket.
+unix_socket_connect(samsung_ims_app, imsd, imsd)

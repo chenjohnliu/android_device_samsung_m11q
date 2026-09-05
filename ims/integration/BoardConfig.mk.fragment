@@ -1,0 +1,2 @@
+# Append to device/samsung/m11q/BoardConfig.mk after the normal sepolicy setup.
+include device/samsung/m11q/ims/sepolicy.mk

@@ -1,0 +1,9 @@
+# Narrow IMS-only property type for the stock sys.smf.mnoname prefix.
+system_internal_prop(m11q_ims_prop)
+
+# Per-slot MMTEL support state published only by the Samsung IMS application.
+system_internal_prop(m11q_ims_supportmmtel_prop)
+
+# Legacy Samsung emergency-timer property consumed across the telephony HAL boundary.
+system_public_prop(m11q_twwan911_prop)
+get_prop(hal_telephony_server, m11q_twwan911_prop)

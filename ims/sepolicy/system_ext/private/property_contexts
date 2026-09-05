@@ -1,0 +1,9 @@
+# Keep SimManager's absent-state property separate from generic sys.* access.
+sys.smf.mnoname u:object_r:m11q_ims_prop:s0 prefix string
+
+# Exact per-slot MMTEL support properties (phoneId suffixes 1 and 2).
+persist.sys.ims.supportmmtel1 u:object_r:m11q_ims_supportmmtel_prop:s0 exact string
+persist.sys.ims.supportmmtel2 u:object_r:m11q_ims_supportmmtel_prop:s0 exact string
+
+# Exact override of the platform ril. -> radio_prop prefix.
+ril.twwan911Timer u:object_r:m11q_twwan911_prop:s0 exact string

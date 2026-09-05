@@ -1,0 +1,19 @@
+# M115F CWK3 service arguments, trigger properties and groups preserved.
+# Only the executable path is relocated to system_ext.
+service multiclient-daemon /system_ext/bin/multiclientd
+    class main
+    disabled
+    user radio
+    group radio cache inet misc log readproc sdcard_rw
+
+service multiclient-daemon1 /system_ext/bin/multiclientd -c 2
+    class main
+    disabled
+    user radio
+    group radio cache inet misc log readproc sdcard_rw
+
+on property:ril.halservice.registered.slot1=true
+    start multiclient-daemon
+
+on property:ril.halservice.registered.slot2=true
+    start multiclient-daemon1

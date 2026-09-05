@@ -1,0 +1,3 @@
+allow system_server samsung_ims_service:service_manager find;
+allow system_server samsung_secims_service:service_manager find;
+allow system_server samsung_imsbase_service:service_manager find;

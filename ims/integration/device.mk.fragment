@@ -1,0 +1,2 @@
+# Append to device/samsung/m11q/device.mk after the common product inherits.
+$(call inherit-product, device/samsung/m11q/ims/ims.mk)
