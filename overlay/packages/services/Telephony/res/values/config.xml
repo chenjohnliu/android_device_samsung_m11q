@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="config_ims_mmtel_package" translatable="false">com.sec.imsservice</string>
+    <!-- Missing-carrier-key fallback for the validated single-SIM1 IMS integration.
+         Explicit carrier configuration and all IMS user/provisioning gates still apply. -->
+    <bool name="config_allow_sim1_volte_carrier_default_fallback">true</bool>
 </resources>

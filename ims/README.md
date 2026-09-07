@@ -15,9 +15,44 @@ Samsung Galaxy M11 SIM1 WWAN VoLTE bring-up on Android 13.
   compatibility facade used by the Stage 1 runtime.
 - The carrier and framework compatibility configuration required by that APK.
 
-Validated scope is outgoing SIM1 WWAN VoLTE registration, call establishment,
-clear two-way speech and teardown under Enforcing. Incoming calls, SIM2/DSDS,
-VoWiFi and emergency calling are not claimed here.
+## Validated Stage 1 scope
+
+Validated on 2026-09-07 with SIM1 WWAN under SELinux Enforcing:
+
+- IMS registration and Android MmTel Voice capability;
+- outgoing VoLTE establishment, clear bidirectional speech and teardown;
+- incoming SIP delivery and Samsung incoming-session creation;
+- Android Telephony `RINGING` and Telecom successful-incoming-call handling;
+- Dialer ringing, answer, clear bidirectional speech and teardown;
+- stable `com.sec.imsservice` process and IMS registration across the incoming
+  call; the VoLTE indicator no longer disappears.
+
+The incoming golden trace reaches this sequence:
+
+```text
+onNewIncomingCall
+  -> onImsIncomingCallEvent
+  -> ImsPhoneCallTracker newState=RINGING
+  -> Telecom successful incoming call
+  -> ImsPhoneCallTracker onCallStarted
+  -> active call
+  -> normal disconnect
+```
+
+The previously observed `ISecImsMmTelEventListener` linkage crash and the
+subsequent incoming Binder deadlock are absent from the successful capture.
+The IMS process PID is unchanged before and after the call.
+
+Golden runtime capture names:
+
+- `volte_capture_20260907_092745_friend_call_me` (incoming/MT);
+- `volte_capture_20260907_093116_I_call_friend` (outgoing/MO).
+
+This claim remains deliberately SIM1-only. SIM2 currently does not expose a
+VoLTE/MMTEL support flag, and SIM2/DSDS behavior has not been validated. IMS
+SMS, VoWiFi, emergency calling, video calling/ViLTE, handover, alternate audio
+devices, and long-duration or repeated-call regression testing are also not
+claimed.
 
 ## Integration
 
