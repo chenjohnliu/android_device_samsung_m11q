@@ -38,6 +38,9 @@ set_prop(samsung_ims_app, m11q_ims_prop)
 set_prop(samsung_ims_app, m11q_ims_supportmmtel_prop)
 # IilManager publishes only the exact legacy Samsung emergency-timer property.
 set_prop(samsung_ims_app, m11q_twwan911_prop)
+# ImsSmsImpl persists the GSM TP-Message-Reference counter before submitting
+# an outgoing SMS. Keep this narrower than granting the generic radio_prop.
+set_prop(samsung_ims_app, m11q_ims_sms_tpmr_prop)
 
 # Provider startup reads, traverses, and writes its own application data directory.
 allow samsung_ims_app samsung_ims_app_data_file:dir {

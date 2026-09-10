@@ -7,3 +7,6 @@ system_internal_prop(m11q_ims_supportmmtel_prop)
 # Legacy Samsung emergency-timer property consumed across the telephony HAL boundary.
 system_public_prop(m11q_twwan911_prop)
 get_prop(hal_telephony_server, m11q_twwan911_prop)
+
+# GSM SMS TP-Message-Reference counter owned by the Samsung IMS application.
+system_internal_prop(m11q_ims_sms_tpmr_prop)

@@ -17,7 +17,7 @@ Samsung Galaxy M11 SIM1 WWAN VoLTE bring-up on Android 13.
 
 ## Validated Stage 1 scope
 
-Validated on 2026-09-07 with SIM1 WWAN under SELinux Enforcing:
+Validated from 2026-09-07 through 2026-09-10 with SIM1 WWAN under SELinux Enforcing:
 
 - IMS registration and Android MmTel Voice capability;
 - outgoing VoLTE establishment, clear bidirectional speech and teardown;
@@ -26,6 +26,10 @@ Validated on 2026-09-07 with SIM1 WWAN under SELinux Enforcing:
 - Dialer ringing, answer, clear bidirectional speech and teardown;
 - stable `com.sec.imsservice` process and IMS registration across the incoming
   call; the VoLTE indicator no longer disappears.
+- outgoing SMS delivery through the validated IMS-to-SGs/CS fallback;
+- physical SIM1 removal/reinsertion followed by automatic VoLTE recovery;
+- post-hot-swap outgoing and incoming VoLTE, bidirectional speech and teardown;
+- post-hot-swap SMS send and receive.
 
 The incoming golden trace reaches this sequence:
 
@@ -48,11 +52,22 @@ Golden runtime capture names:
 - `volte_capture_20260907_092745_friend_call_me` (incoming/MT);
 - `volte_capture_20260907_093116_I_call_friend` (outgoing/MO).
 
+On 2026-09-10, the runtime-validated candidate used the Stage 1BQ3 IMS bridge
+with the carrier-neutral BQ6 Telephony fallback. A clean-flash control passed a
+call to 188 before and after SIM1 removal/reinsertion. The VoLTE indicator
+returned automatically, an external incoming call rang and completed with
+clear two-way speech and normal teardown, and SMS send/receive passed. Earlier
+cold-boot call failures persisted after source rollback but disappeared after
+formatting `/data`; they are evidence of persistent-state contamination, not a
+BQ code regression. The exact contaminating IMS/Telephony data item remains
+unidentified.
+
 This claim remains deliberately SIM1-only. SIM2 currently does not expose a
-VoLTE/MMTEL support flag, and SIM2/DSDS behavior has not been validated. IMS
-SMS, VoWiFi, emergency calling, video calling/ViLTE, handover, alternate audio
-devices, and long-duration or repeated-call regression testing are also not
-claimed.
+VoLTE/MMTEL support flag, and SIM2/DSDS behavior has not been validated. Pure
+IMS-SMS delivery and the transport used by the received SMS are not claimed.
+VoWiFi, emergency calling, video calling/ViLTE, inter-RAT handover, alternate
+audio devices, other stock builds/models/carriers, and extended regression
+testing are also not claimed.
 
 ## Integration
 
