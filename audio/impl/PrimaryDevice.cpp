@@ -257,14 +257,24 @@ Return<Result> PrimaryDevice::setMode(AudioMode mode) {
         } else if (strcmp(simSlot, "1") == 0) {
             mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x02");
         } else {
-            // Stage 1 is deliberately SIM1-only. Samsung IMS calls do not make
-            // the patched RIL slot property available before this mode request,
-            // so use the existing SIM1 sequence instead of leaving the modem
-            // voice use-case inactive. Do not extend this fallback to DSDS
-            // without an explicit call-slot signal.
-            ALOGW("Call slot unavailable (%s); applying Stage1 SIM1 IMS audio fallback",
-                  simSlot);
-            mDevice->halSetParameters("call_state=2;g_call_state=2;g_call_sim_slot=0x01");
+            // Samsung IMS calls do not publish the patched RIL call-slot property before this
+            // synchronous mode request. Permit a SIM2 fallback only when vendor init has proved
+            // the narrowly supported topology: SIM1 absent, SIM2 present and SIM2 is DDS.
+            // Every other unknown or transitional state retains the runtime-validated Stage 1
+            // SIM1 fallback. This is not a DSDS call-slot inference.
+            char sim2SingleActive[PROPERTY_VALUE_MAX];
+            property_get("vendor.audio.ims.sim2_active", sim2SingleActive, "0");
+            if (strcmp(sim2SingleActive, "1") == 0) {
+                ALOGW("Call slot unavailable (%s); applying single-active SIM2 IMS audio "
+                      "fallback", simSlot);
+                mDevice->halSetParameters(
+                        "call_state=2;g_call_state=2;g_call_sim_slot=0x02");
+            } else {
+                ALOGW("Call slot unavailable (%s); applying Stage1 SIM1 IMS audio fallback",
+                      simSlot);
+                mDevice->halSetParameters(
+                        "call_state=2;g_call_state=2;g_call_sim_slot=0x01");
+            }
         }
     } else if (mode == AudioMode::NORMAL || strcmp(simSlot, "-1") == 0) {
         // NORMAL always tears down call state, even if RIL left a stale slot.

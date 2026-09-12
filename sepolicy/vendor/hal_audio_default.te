@@ -4,3 +4,4 @@ dontaudit hal_audio_default default_prop:file { getattr open read map };
 dontaudit hal_audio_default radio_prop:file { getattr open read map };
 
 get_prop(hal_audio_default, vendor_ril_prop)
+get_prop(hal_audio_default, vendor_m11q_audio_ims_prop)

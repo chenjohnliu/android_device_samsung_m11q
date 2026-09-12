@@ -10,4 +10,4 @@ ril.twwan911Timer u:object_r:m11q_twwan911_prop:s0 exact string
 
 # Exact override of the platform persist.radio. -> radio_prop prefix. The
 # Samsung IMS SMS implementation stores its GSM TP-Message-Reference here.
-persist.radio.tpmr_sms u:object_r:m11q_ims_sms_tpmr_prop:s0 exact int
+persist.radio.tpmr_sms u:object_r:m11q_ims_sms_tpmr_prop:s0 exact string

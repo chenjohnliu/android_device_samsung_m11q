@@ -1,0 +1,16 @@
+# Export only a derived single-active-SIM2 bit to the vendor audio HAL.
+# This script must remain on system_ext: vendor init cannot use ril.* triggers.
+on early-init
+    setprop vendor.audio.ims.sim2_active 0
+
+# Reset actions are intentionally declared before the exact enable action. When
+# either source property changes, unknown, SIM1, dual-SIM and transitional states
+# fail closed before the exact supported topology can enable the SIM2 fallback.
+on property:ril.hasisim=*
+    setprop vendor.audio.ims.sim2_active 0
+
+on property:ril.dds.data.slotid=*
+    setprop vendor.audio.ims.sim2_active 0
+
+on property:ril.hasisim=0,1 && property:ril.dds.data.slotid=1
+    setprop vendor.audio.ims.sim2_active 1

@@ -61,6 +61,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
 	init.samsung.bsp.rc \
 	init.samsung.rc \
+    init.m11q.audio_ims.rc \
     init.target.rc \
     ueventd.qcom.rc \
     init.class_main.sh \
