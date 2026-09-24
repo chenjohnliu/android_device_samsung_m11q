@@ -1,3 +1,4 @@
 type samsung_ims_service, service_manager_type;
 type samsung_secims_service, service_manager_type;
 type samsung_imsbase_service, service_manager_type;
+type samsung_sve_service, service_manager_type;

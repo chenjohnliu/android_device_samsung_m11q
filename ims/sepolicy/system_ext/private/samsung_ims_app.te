@@ -31,6 +31,10 @@ allow samsung_ims_app audioserver_service:service_manager find;
 # ToneGenerator AudioTrack creation reports metrics during IMS call setup.
 # Denial blocks the IMS worker in a ten-second ServiceManager retry.
 allow samsung_ims_app mediametrics_service:service_manager find;
+# VoWiFi audio is hosted by the stock AP-side SVE system application.
+allow samsung_ims_app samsung_sve_service:service_manager find;
+binder_call(samsung_ims_app, system_app)
+binder_call(system_app, samsung_ims_app)
 
 # SimManager writes only the exact sys.smf.mnoname<slot> property family.
 set_prop(samsung_ims_app, m11q_ims_prop)

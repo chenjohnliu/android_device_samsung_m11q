@@ -36,6 +36,29 @@ LOCAL_REQUIRED_MODULES := \
     epdgmanager_library.xml
 include $(BUILD_PREBUILT)
 
+# Compatibility registration for Samsung's required svemanager Java shared
+# library. The M115F APKs carry their matching com.sec.sve Binder classes;
+# this small library supplies the PackageManager-visible framework entry that
+# AOSP does not ship.
+include $(CLEAR_VARS)
+LOCAL_MODULE := svemanager
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := src/svemanager/com/sec/sve/compat/SveManagerLibrary.java
+LOCAL_SDK_VERSION := system_current
+LOCAL_DEX_PREOPT := false
+include $(BUILD_JAVA_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := svemanager_library.xml
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := svemanager_library.xml
+LOCAL_SRC_FILES := permissions/svemanager_library.xml
+LOCAL_MODULE_RELATIVE_PATH := permissions
+include $(BUILD_PREBUILT)
+
 # Exact decoded M115F CWK3 OXM/BRI carrier-feature table. The compatibility
 # class intentionally uses this device-scoped copy instead of recreating the
 # stock OMC mount/property manager on Android 13.
@@ -234,4 +257,52 @@ LOCAL_STRIP_MODULE := false
 LOCAL_CHECK_ELF_FILES := true
 LOCAL_INIT_RC := multiclientd.rc
 LOCAL_SHARED_LIBRARIES := libandroidicu liblog libcutils libutils android.hardware.radio@1.0 m11q_ims_radio_bridge_2_0 m11q_ims_radio_bridge_2_1 libhidlbase libhidltransport libhwbinder libc++ libc libm libdl
+include $(BUILD_PREBUILT)
+# Stock M115F application-processor media engine used for IWLAN audio. VoLTE
+# uses the modem-side CpAudioEngine, while VoWiFi selects this service when it
+# creates the audio session. Keep all Samsung-only ELF dependencies and the
+# narrow Android 12-to-13 symbol/layout shim private to the app's 32-bit native
+# library directory. The shim also interposes only the WaveOut open/close path,
+# because CWK3's inline sp<AudioTrack> and field offsets do not match Android 13.
+# FrameCapture is an audio-safe, video-disabled ABI stub.
+include $(CLEAR_VARS)
+LOCAL_MODULE := sveservice
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_SRC_FILES := proprietary/app/sveservice/sveservice.apk
+LOCAL_CERTIFICATE := platform
+LOCAL_MULTILIB := 32
+LOCAL_DEX_PREOPT := false
+LOCAL_OPTIONAL_USES_LIBRARIES := svemanager
+LOCAL_ENFORCE_USES_LIBRARIES := false
+LOCAL_PREBUILT_JNI_LIBS := \
+    proprietary/app/sveservice/lib/arm/libAudioFWInterface.so \
+    proprietary/app/sveservice/lib/arm/libAudioTranscoder.so \
+    proprietary/app/sveservice/lib/arm/libPSI.so \
+    proprietary/app/sveservice/lib/arm/libRecorder.so \
+    proprietary/app/sveservice/lib/arm/libSRTP.so \
+    proprietary/app/sveservice/lib/arm/libSTE.so \
+    proprietary/app/sveservice/lib/arm/libSamsungAPVoiceEngine.so \
+    proprietary/app/sveservice/lib/arm/lib_android_FrameCapture.so \
+    proprietary/app/sveservice/lib/arm/libamrnb_float.so \
+    proprietary/app/sveservice/lib/arm/libamrwb_float.so \
+    proprietary/app/sveservice/lib/arm/libevs_float.so \
+    proprietary/app/sveservice/lib/arm/libfloatingfeature.so \
+    proprietary/app/sveservice/lib/arm/libm11q_sve_compat.so \
+    proprietary/app/sveservice/lib/arm/libmediarelayengine.so \
+    proprietary/app/sveservice/lib/arm/libnativecfms.so \
+    proprietary/app/sveservice/lib/arm/libresampler_ims.so \
+    proprietary/app/sveservice/lib/arm/librtp.so \
+    proprietary/app/sveservice/lib/arm/librtppayload.so \
+    proprietary/app/sveservice/lib/arm/libsamsung_videoengine_9_0.so \
+    proprietary/app/sveservice/lib/arm/libsavscmn.so \
+    proprietary/app/sveservice/lib/arm/libsecnativefeature.so \
+    proprietary/app/sveservice/lib/arm/libsvejni.so \
+    proprietary/app/sveservice/lib/arm/libsveservice.so \
+    proprietary/app/sveservice/lib/arm/libvad.so
+LOCAL_REQUIRED_MODULES := \
+    svemanager \
+    svemanager_library.xml
 include $(BUILD_PREBUILT)

@@ -1,9 +1,13 @@
 # Stage 1A/1B: package/signing, private ARM32 JNI payload, imsd and the exact
 # M115F CWK3 GSMA/RCS OpenAPI shared library required by imsservice.
-# SVE, ImsLogger, ImsSettings and the Android IMS facade remain deferred.
+# ImsLogger, ImsSettings and the Android IMS facade remain deferred. SVE is
+# included because IWLAN audio sessions use the AP-side Samsung media engine.
 PRODUCT_PACKAGES += \
     imsservice \
     imsmanager \
+    svemanager \
+    svemanager_library.xml \
+    sveservice \
     rcsopenapi \
     vsimmanager \
     EpdgManager \

@@ -1,0 +1,3 @@
+# Stock sveservice runs under the platform system_app domain and publishes one
+# native Binder endpoint consumed by Samsung IMS.
+add_service(system_app, samsung_sve_service)
