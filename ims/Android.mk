@@ -258,6 +258,26 @@ LOCAL_CHECK_ELF_FILES := true
 LOCAL_INIT_RC := multiclientd.rc
 LOCAL_SHARED_LIBRARIES := libandroidicu liblog libcutils libutils android.hardware.radio@1.0 m11q_ims_radio_bridge_2_0 m11q_ims_radio_bridge_2_1 libhidlbase libhidltransport libhwbinder libc++ libc libm libdl
 include $(BUILD_PREBUILT)
+
+# Exact M115F CWK3 Wi-Fi Calling activity/provider package. EpdgService checks
+# both this package and LaunchUnifiedActivity before it enables ePDG, so this
+# is a functional dependency rather than an optional settings front end.
+# Keep the stock /system/app placement; platform signing supplies the Android
+# signature permissions requested by the original Samsung package.
+include $(CLEAR_VARS)
+LOCAL_MODULE := UnifiedWFC
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_SRC_FILES := proprietary/app/UnifiedWFC/UnifiedWFC.apk
+LOCAL_CERTIFICATE := platform
+LOCAL_DEX_PREOPT := false
+LOCAL_OPTIONAL_USES_LIBRARIES := imsmanager
+LOCAL_ENFORCE_USES_LIBRARIES := false
+LOCAL_REQUIRED_MODULES := imsmanager
+include $(BUILD_PREBUILT)
+
 # Stock M115F application-processor media engine used for IWLAN audio. VoLTE
 # uses the modem-side CpAudioEngine, while VoWiFi selects this service when it
 # creates the audio session. Keep all Samsung-only ELF dependencies and the
@@ -306,6 +326,63 @@ LOCAL_REQUIRED_MODULES := \
     svemanager \
     svemanager_library.xml
 include $(BUILD_PREBUILT)
+
+# Exact CWK3 Samsung AP-assisted IWLAN service. Platform signing is required
+# because the manifest uses android.uid.system.
+include $(CLEAR_VARS)
+LOCAL_MODULE := EpdgService
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_SRC_FILES := proprietary/priv-app/EpdgService/EpdgService.apk
+LOCAL_CERTIFICATE := platform
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_DEX_PREOPT := false
+LOCAL_OPTIONAL_USES_LIBRARIES := EpdgManager imsmanager
+LOCAL_ENFORCE_USES_LIBRARIES := false
+LOCAL_REQUIRED_MODULES := \
+    EpdgManager \
+    imsmanager \
+    m11q_epdg_apns_conf.xml \
+    m11q_mapconprovider.xml \
+    privapp-permissions-com.sec.epdg.xml \
+    m11q_eris \
+    m11q_eris_conf \
+    m11q_eris_strongswan \
+    m11q_eris_charon \
+    m11q_eris_simaka \
+    m11q_eris_secril_client
+LOCAL_REQUIRED_MODULES += UnifiedWFC
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_epdg_apns_conf.xml
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := epdg_apns_conf.xml
+LOCAL_SRC_FILES := proprietary/etc/epdg_apns_conf.xml
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_mapconprovider.xml
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := mapconprovider.xml
+LOCAL_SRC_FILES := proprietary/etc/mapconprovider.xml
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := privapp-permissions-com.sec.epdg.xml
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := privapp-permissions-com.sec.epdg.xml
+LOCAL_SRC_FILES := permissions/privapp-permissions-com.sec.epdg.xml
+LOCAL_MODULE_RELATIVE_PATH := permissions
+LOCAL_SYSTEM_EXT_MODULE := true
+include $(BUILD_PREBUILT)
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := m11q_eris_conf
 LOCAL_MODULE_OWNER := samsung

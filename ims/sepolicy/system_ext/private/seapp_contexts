@@ -1,1 +1,2 @@
 user=system seinfo=platform name=com.sec.imsservice domain=samsung_ims_app type=samsung_ims_app_data_file levelFrom=user
+user=system seinfo=platform name=com.sec.epdg domain=samsung_ims_app type=samsung_ims_app_data_file levelFrom=user

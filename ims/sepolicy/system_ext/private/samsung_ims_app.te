@@ -7,10 +7,12 @@ binder_use(samsung_ims_app)
 hwbinder_use(samsung_ims_app)
 hal_client_domain(samsung_ims_app, hal_telephony)
 
-# The IMS core publishes the three services observed on M115F stock.
+# Samsung IMS components publish the exact services observed on M115F stock.
 add_service(samsung_ims_app, samsung_ims_service)
 add_service(samsung_ims_app, samsung_secims_service)
 add_service(samsung_ims_app, samsung_imsbase_service)
+# EpdgService publishes its IEpdgManager binder under this exact case-sensitive name.
+add_service(samsung_ims_app, samsung_epdg_service)
 
 # Telephony owns lifecycle calls and receives callbacks.
 binder_call(samsung_ims_app, system_server)
@@ -36,6 +38,21 @@ allow samsung_ims_app samsung_sve_service:service_manager find;
 binder_call(samsung_ims_app, system_app)
 binder_call(system_app, samsung_ims_app)
 
+# EpdgWifiInfo obtains WifiManager through system_server, then directly uses
+# wificond's nl80211 binder. These are the two exact service lookups denied on
+# the Wi-Fi access path; the system_server binder call is already granted.
+allow samsung_ims_app wifi_service:service_manager find;
+allow samsung_ims_app wifinl80211_service:service_manager find;
+binder_call(samsung_ims_app, wificond)
+
+# Bounded permissive capture on the ePDG startup path observed only these
+# additional framework lookups. Keep this as exact service types rather than
+# granting the service_manager_type attribute.
+allow samsung_ims_app role_service:service_manager find;
+allow samsung_ims_app telecom_service:service_manager find;
+allow samsung_ims_app netstats_service:service_manager find;
+allow samsung_ims_app statusbar_service:service_manager find;
+
 # SimManager writes only the exact sys.smf.mnoname<slot> property family.
 set_prop(samsung_ims_app, m11q_ims_prop)
 # RegistrationUtils publishes only the two exact per-slot MMTEL support properties.
@@ -45,13 +62,18 @@ set_prop(samsung_ims_app, m11q_twwan911_prop)
 # ImsSmsImpl persists the GSM TP-Message-Reference counter before submitting
 # an outgoing SMS. Keep this narrower than granting the generic radio_prop.
 set_prop(samsung_ims_app, m11q_ims_sms_tpmr_prop)
+# EpdgSubScription publishes only the exact current default-data phone ID.
+set_prop(samsung_ims_app, m11q_epdg_default_data_prop)
+# EpdgUtils writes only two exact Samsung ePDG state properties; do not grant
+# the generic radio_prop prefix.
+set_prop(samsung_ims_app, m11q_epdg_radio_prop)
 
 # Provider startup reads, traverses, and writes its own application data directory.
 allow samsung_ims_app samsung_ims_app_data_file:dir {
-    getattr search write add_name create setattr remove_name
+    getattr search read open write add_name create setattr remove_name
 };
 allow samsung_ims_app samsung_ims_app_data_file:file {
-    create read getattr open write rename unlink setattr lock ioctl
+    create read getattr open write append rename unlink setattr lock ioctl
 };
 binder_call(samsung_ims_app, radio)
 binder_call(radio, samsung_ims_app)

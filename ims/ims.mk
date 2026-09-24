@@ -19,6 +19,11 @@ PRODUCT_PACKAGES += \
     m11q_cscfeature.xml \
     m11q_carrier_feature.json \
     privapp-permissions-com.sec.imsservice.xml \
+    EpdgService \
+    UnifiedWFC \
+    m11q_epdg_apns_conf.xml \
+    m11q_mapconprovider.xml \
+    privapp-permissions-com.sec.epdg.xml \
     imsd \
     m11q_eris \
     m11q_eris_conf \

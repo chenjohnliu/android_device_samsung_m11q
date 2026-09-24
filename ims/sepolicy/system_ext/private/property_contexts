@@ -15,3 +15,11 @@ persist.radio.tpmr_sms u:object_r:m11q_ims_sms_tpmr_prop:s0 exact string
 # EpdgService may start only the stock eris init service.
 ctl.start$eris u:object_r:m11q_eris_ctl_prop:s0 exact string
 ctl.stop$eris u:object_r:m11q_eris_ctl_prop:s0 exact string
+
+# EpdgSubScription.readSimInfo publishes the selected zero-based phone ID.
+sys.default.data.phoneid u:object_r:m11q_epdg_default_data_prop:s0 exact string
+
+# Exact properties written through EpdgUtils.setEpdgProperty. Preserve the
+# stock `currenMno` spelling.
+ril.epdg.currenMno u:object_r:m11q_epdg_radio_prop:s0 exact string
+ril.epdg.resetThrottle u:object_r:m11q_epdg_radio_prop:s0 exact string

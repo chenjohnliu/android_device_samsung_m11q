@@ -26,3 +26,11 @@ allow m11q_eris m11q_eris_data_file:file create_file_perms;
 allow m11q_eris m11q_multiclient:unix_stream_socket connectto;
 binder_call(m11q_eris, system_server)
 allow m11q_eris system_suspend_hwservice:hwservice_manager find;
+
+# EpdgService shares Samsung IMS's platform UID/domain and controls only eris.
+set_prop(samsung_ims_app, m11q_eris_ctl_prop)
+unix_socket_connect(samsung_ims_app, m11q_eris, m11q_eris)
+allow samsung_ims_app m11q_eris:fd use;
+allow samsung_ims_app m11q_eris:udp_socket { read write getattr getopt };
+allow system_server m11q_eris:fd use;
+allow system_server m11q_eris:udp_socket { read write getattr getopt };

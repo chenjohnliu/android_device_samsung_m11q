@@ -13,3 +13,10 @@ system_internal_prop(m11q_ims_sms_tpmr_prop)
 
 # Service-specific init control property; does not grant generic ctl.start.
 system_internal_prop(m11q_eris_ctl_prop)
+
+# Current default-data phone ID published by the Samsung ePDG service.
+system_internal_prop(m11q_epdg_default_data_prop)
+
+# Exact Samsung ePDG state properties shared with the telephony HAL.
+system_public_prop(m11q_epdg_radio_prop)
+get_prop(hal_telephony_server, m11q_epdg_radio_prop)

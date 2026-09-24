@@ -1,4 +1,5 @@
 ims6                    u:object_r:samsung_ims_service:s0
 secims                  u:object_r:samsung_secims_service:s0
 ImsBase                 u:object_r:samsung_imsbase_service:s0
+epdgService             u:object_r:samsung_epdg_service:s0
 SveService              u:object_r:samsung_sve_service:s0
