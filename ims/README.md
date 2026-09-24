@@ -1,7 +1,7 @@
-# M115F IMS compatibility layer — Stage 1
+# M115F IMS compatibility layer — Stage 3 VoWiFi validation
 
-This directory contains the device-side integration used by the validated
-Samsung Galaxy M11 SIM1 WWAN VoLTE bring-up on Android 13.
+This directory contains the device-side integration for Samsung Galaxy M11
+VoLTE and the ongoing VoWiFi bring-up on Android 13.
 
 ## What it enables
 
@@ -62,12 +62,16 @@ formatting `/data`; they are evidence of persistent-state contamination, not a
 BQ code regression. The exact contaminating IMS/Telephony data item remains
 unidentified.
 
-This claim remains deliberately SIM1-only. SIM2 currently does not expose a
-VoLTE/MMTEL support flag, and SIM2/DSDS behavior has not been validated. Pure
-IMS-SMS delivery and the transport used by the received SMS are not claimed.
-VoWiFi, emergency calling, video calling/ViLTE, inter-RAT handover, alternate
-audio devices, other stock builds/models/carriers, and extended regression
-testing are also not claimed.
+The Stage 2 bridge also supports VoLTE and SMS on physical SIM2 when it is the
+only active subscription. Concurrent dual-SIM operation remains unvalidated.
+Outgoing SMS works, but pure end-to-end IMS transport is not claimed.
+
+On the current custom-ROM build, an outgoing VoWiFi call to 188 stayed
+connected, the automated voice was audible, and the user hung up normally.
+This is one scoped device test, not complete VoWiFi validation. Microphone
+uplink, incoming Wi-Fi calls, calls to another person, emergency calling,
+inter-RAT handover, alternate audio devices, other stock builds/models/carriers,
+and extended regression testing remain unverified.
 
 ## Integration
 

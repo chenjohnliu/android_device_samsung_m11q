@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!-- Samsung-profile-backed ePDG allowlist; unknown carriers fail closed. -->
+<carrier_config_list>
+    <carrier_config mcc="466" mnc="01">
+        <boolean name="carrier_wfc_ims_available_bool" value="true"/>
+        <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
+        <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
+    </carrier_config>
+    <carrier_config mcc="466" mnc="05">
+        <boolean name="carrier_wfc_ims_available_bool" value="true"/>
+        <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
+        <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
+    </carrier_config>
+    <carrier_config mcc="466" mnc="92">
+        <boolean name="carrier_wfc_ims_available_bool" value="true"/>
+        <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
+        <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
+    </carrier_config>
+    <carrier_config mcc="466" mnc="97">
+        <boolean name="carrier_wfc_ims_available_bool" value="true"/>
+        <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
+        <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
+        <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
+    </carrier_config>
+</carrier_config_list>
