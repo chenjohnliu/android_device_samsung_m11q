@@ -1,0 +1,28 @@
+# Samsung's CWK3 IKE/IPsec backend. Keep this separate from the IMS daemon.
+type m11q_eris, domain, coredomain, mlstrustedsubject;
+type m11q_eris_exec, exec_type, file_type, system_file_type;
+type m11q_eris_socket, file_type, mlstrustedobject;
+type m11q_eris_data_file, file_type, data_file_type, core_data_file_type;
+
+init_daemon_domain(m11q_eris)
+net_domain(m11q_eris)
+hwbinder_use(m11q_eris)
+hal_client_domain(m11q_eris, hal_telephony)
+
+allow m11q_eris self:capability { net_admin net_bind_service net_raw };
+allow m11q_eris self:tun_socket create_socket_perms_no_ioctl;
+# Samsung's telephony HAL passes the IPsec tunnel socket to ERIS, which
+# relabels it into its own domain.  Platform policy cannot name the vendor-only
+# rild type directly, so use its public hal_telephony_server attribute.
+allow m11q_eris hal_telephony_server:tun_socket relabelfrom;
+allow m11q_eris self:tun_socket relabelfrom;
+allow m11q_eris self:tun_socket relabelto;
+allow m11q_eris tun_device:chr_file rw_file_perms;
+allowxperm m11q_eris tun_device:chr_file ioctl { 0x54ca };
+allow m11q_eris proc_net:file rw_file_perms;
+allow m11q_eris sysfs_wake_lock:file rw_file_perms;
+allow m11q_eris m11q_eris_data_file:dir create_dir_perms;
+allow m11q_eris m11q_eris_data_file:file create_file_perms;
+allow m11q_eris m11q_multiclient:unix_stream_socket connectto;
+binder_call(m11q_eris, system_server)
+allow m11q_eris system_suspend_hwservice:hwservice_manager find;

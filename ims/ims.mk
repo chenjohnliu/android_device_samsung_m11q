@@ -20,6 +20,14 @@ PRODUCT_PACKAGES += \
     m11q_carrier_feature.json \
     privapp-permissions-com.sec.imsservice.xml \
     imsd \
+    m11q_eris \
+    m11q_eris_conf \
+    m11q_eris_strongswan \
+    m11q_eris_crypto_compat \
+    m11q_eris_ssl_compat \
+    m11q_eris_charon \
+    m11q_eris_simaka \
+    m11q_eris_secril_client \
     m11q_ims_multiclientd \
     m11q_ims_radio_bridge_2_0 \
     m11q_ims_radio_bridge_2_1 \

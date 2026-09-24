@@ -10,3 +10,6 @@ get_prop(hal_telephony_server, m11q_twwan911_prop)
 
 # GSM SMS TP-Message-Reference counter owned by the Samsung IMS application.
 system_internal_prop(m11q_ims_sms_tpmr_prop)
+
+# Service-specific init control property; does not grant generic ctl.start.
+system_internal_prop(m11q_eris_ctl_prop)

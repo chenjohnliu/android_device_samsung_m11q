@@ -19,6 +19,13 @@ allow samsung_ims_app m11q_multiclient:unix_stream_socket connectto;
 allow m11q_multiclient samsung_ims_app:dir search;
 allow m11q_multiclient samsung_ims_app:file { open read getattr };
 
+# ERIS uses the same OEM socket protocol for EAP-AKA.  The daemon validates
+# every accepted peer through /proc/<peer-pid>/cmdline before forwarding the
+# SIM authentication request; restrict this access to the dedicated ERIS
+# domain just as for imsservice above.
+allow m11q_multiclient m11q_eris:dir search;
+allow m11q_multiclient m11q_eris:file { open read getattr };
+
 # SehBridgeIndication::openFd serves Samsung RIL's fast-dormancy files. Runtime
 # currently proves only directory traversal is denied; add no file access yet.
 allow m11q_multiclient radio_data_file:dir search;

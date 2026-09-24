@@ -306,3 +306,81 @@ LOCAL_REQUIRED_MODULES := \
     svemanager \
     svemanager_library.xml
 include $(BUILD_PREBUILT)
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_eris_conf
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := eris.conf
+LOCAL_SRC_FILES := proprietary/etc/eris.conf
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_eris
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_STEM := eris
+LOCAL_SRC_FILES := proprietary/bin/eris
+# multiclientd identifies the ERIS OEM client from /proc/<pid>/cmdline and
+# accepts only the stock executable name /system/bin/eris.  Installing this
+# binary in system_ext changes argv[0] and makes SIM AKA fail before the OEM
+# authentication request reaches RIL.
+LOCAL_MULTILIB := 32
+LOCAL_STRIP_MODULE := false
+LOCAL_CHECK_ELF_FILES := false
+LOCAL_INIT_RC := eris.rc
+LOCAL_REQUIRED_MODULES := \
+    m11q_eris_crypto_compat \
+    m11q_eris_ssl_compat
+include $(BUILD_PREBUILT)
+
+# eris was built against Samsung's Android 12 OpenSSL ABI, including the
+# legacy LHASH entry points removed from Android 13's BoringSSL. Install a
+# private, renamed VNDK 31 pair so no platform or unrelated process resolves
+# against the compatibility libraries.
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_eris_crypto_compat
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE_STEM := liberc
+LOCAL_SRC_FILES := proprietary/lib/arm/liberc.so
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_MULTILIB := 32
+LOCAL_STRIP_MODULE := false
+LOCAL_CHECK_ELF_FILES := true
+LOCAL_SHARED_LIBRARIES := libc libm libdl
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := m11q_eris_ssl_compat
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE_STEM := libers
+LOCAL_SRC_FILES := proprietary/lib/arm/libers.so
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_MULTILIB := 32
+LOCAL_STRIP_MODULE := false
+LOCAL_CHECK_ELF_FILES := true
+LOCAL_SHARED_LIBRARIES := m11q_eris_crypto_compat libc libm libdl
+include $(BUILD_PREBUILT)
+
+define m11q-eris-lib
+include $$(CLEAR_VARS)
+LOCAL_MODULE := $(1)
+LOCAL_MODULE_OWNER := samsung
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE_STEM := $(2)
+LOCAL_SRC_FILES := proprietary/lib/arm/$(2).so
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_MULTILIB := 32
+LOCAL_STRIP_MODULE := false
+LOCAL_CHECK_ELF_FILES := false
+include $$(BUILD_PREBUILT)
+endef
+
+$(eval $(call m11q-eris-lib,m11q_eris_strongswan,liberis_strongswan))
+$(eval $(call m11q-eris-lib,m11q_eris_charon,liberis_charon))
+$(eval $(call m11q-eris-lib,m11q_eris_simaka,liberis_simaka))
+$(eval $(call m11q-eris-lib,m11q_eris_secril_client,libsecril-client))

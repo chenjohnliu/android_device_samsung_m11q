@@ -1,0 +1,13 @@
+# Exact CWK3 service contract.  Keep the stock executable path because
+# multiclientd uses /proc/<pid>/cmdline as an OEM-client allowlist key.
+on post-fs-data
+    mkdir /data/misc/eris 0770 system system
+
+service eris /system/bin/eris
+    class main
+    socket eris stream 0660 system system
+    user system
+    group system inet
+    capabilities NET_ADMIN NET_BIND_SERVICE NET_RAW
+    oneshot
+    disabled
