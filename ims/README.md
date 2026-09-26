@@ -66,12 +66,19 @@ The Stage 2 bridge also supports VoLTE and SMS on physical SIM2 when it is the
 only active subscription. Concurrent dual-SIM operation remains unvalidated.
 Outgoing SMS works, but pure end-to-end IMS transport is not claimed.
 
-On the current custom-ROM build, an outgoing VoWiFi call to 188 stayed
-connected, the automated voice was audible, and the user hung up normally.
-This is one scoped device test, not complete VoWiFi validation. Microphone
-uplink, incoming Wi-Fi calls, calls to another person, emergency calling,
-inter-RAT handover, alternate audio devices, other stock builds/models/carriers,
-and extended regression testing remain unverified.
+Stage 3 VoWiFi is runtime-validated on the tested M11/Taiwan Mobile setup for
+an outgoing call to 188 and an incoming call from another handset. The 188
+service audio was audible and the call ended normally. For incoming calls,
+selecting Samsung's SAE audio interface before its native AudioSession reached
+ESTABLISHED caused silence in both directions and an automatic disconnect at
+about 15–17 seconds. Moving that update to post-ESTABLISHED restored sustained
+bidirectional audio.
+
+This remains a scoped result. Emergency calling, ViLTE, inter-RAT handover,
+alternate audio devices, concurrent dual-SIM operation, other stock
+builds/models/carriers and extended regression testing remain unverified. The
+existing Samsung behavior that may reset the Wi-Fi Calling user preference
+after SIM identity changes is intentionally unchanged.
 
 ## Integration
 
