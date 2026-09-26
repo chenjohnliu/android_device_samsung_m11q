@@ -5,7 +5,7 @@ Status: Booted on CherishOS 4.12 / Android 13.
 
 ## IMS status
 
-The current `m11q-volte-stage1` branch integrates the M115F CWK3 Samsung IMS
+The current `m11q-volte` branch integrates the M115F CWK3 Samsung IMS
 stack through a source-only compatibility layer. With one active subscription
 at a time, the tested scope includes:
 
