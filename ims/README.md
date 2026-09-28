@@ -66,13 +66,20 @@ The Stage 2 bridge also supports VoLTE and SMS on physical SIM2 when it is the
 only active subscription. Concurrent dual-SIM operation remains unvalidated.
 Outgoing SMS works, but pure end-to-end IMS transport is not claimed.
 
-Stage 3 VoWiFi is runtime-validated on the tested M11/Taiwan Mobile setup for
-an outgoing call to 188 and an incoming call from another handset. The 188
-service audio was audible and the call ended normally. For incoming calls,
-selecting Samsung's SAE audio interface before its native AudioSession reached
-ESTABLISHED caused silence in both directions and an automatic disconnect at
-about 15–17 seconds. Moving that update to post-ESTABLISHED restored sustained
-bidirectional audio.
+Stage 3 VoWiFi was runtime-validated on the tested CherishOS M11/Taiwan Mobile
+setup for an outgoing call to 188 and an incoming call from another handset.
+The 188 service audio was audible and the call ended normally. For incoming
+calls, selecting Samsung's SAE audio interface before its native AudioSession
+reached ESTABLISHED caused silence in both directions and an automatic
+disconnect at about 15–17 seconds. Moving that update to post-ESTABLISHED
+restored sustained bidirectional audio on that build.
+
+The same BT1 post-ESTABLISHED transform is present in the deterministic APK
+currently used by the crDroid port, but an incoming VoWiFi call there has
+reproduced the earlier bidirectional-silence and automatic-disconnect symptom.
+BT1 is therefore a required reproduced input, not proof that incoming VoWiFi
+media works on every Android 13 ROM. The crDroid result requires its own
+runtime diagnosis before support can be claimed.
 
 This remains a scoped result. Emergency calling, ViLTE, inter-RAT handover,
 alternate audio devices, concurrent dual-SIM operation, other stock
@@ -103,5 +110,21 @@ They are required to reproduce the local build but are not suitable for blind
 redistribution in a public source repository. A public release should provide
 an extraction workflow and verified hashes instead of committing Samsung APK,
 JAR, ELF or executable payloads.
+
+The patched `imsservice.apk` is generated locally from hash-pinned stock inputs
+by the public
+[`Samsung-m11-ims-compat-layer`](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer)
+builder. Stage 3 BT1 was added by compatibility-layer commit
+[`a9473bf`](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer/commit/a9473bf933fc6b3026c9c7356cece6d45e86f936).
+The expected current aligned unsigned output is:
+
+```text
+832ad6fca643791a19776be14cb11ad6d1395bfe3d128e058dc4442e703990a9  imsservice.apk
+```
+
+Run `ims/verify_payload.ps1` after placing all private files. A stock or older
+patched `imsservice.apk` must fail verification instead of silently producing a
+ROM without the current compatibility transforms. The APK itself remains
+untracked and is not uploaded to this repository.
 
 No Android ROM build is performed by this directory.
