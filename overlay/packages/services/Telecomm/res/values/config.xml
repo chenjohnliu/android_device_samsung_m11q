@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Samsung secims requires this callback after Telecom enters MODE_IN_CALL. -->
+    <bool name="config_enable_samsung_mt_vowifi_audio_path">true</bool>
+</resources>

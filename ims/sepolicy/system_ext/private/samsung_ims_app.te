@@ -38,6 +38,9 @@ allow samsung_ims_app samsung_sve_service:service_manager find;
 binder_call(samsung_ims_app, system_app)
 binder_call(system_app, samsung_ims_app)
 
+# Telecom runs as system_app and starts the slot-specific ePDG audio path after MODE_IN_CALL.
+allow system_app samsung_secims_service:service_manager find;
+
 # EpdgWifiInfo obtains WifiManager through system_server, then directly uses
 # wificond's nl80211 binder. These are the two exact service lookups denied on
 # the Wi-Fi access path; the system_server binder call is already granted.
