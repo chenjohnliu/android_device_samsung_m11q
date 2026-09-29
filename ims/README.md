@@ -75,11 +75,14 @@ disconnect at about 15–17 seconds. Moving that update to post-ESTABLISHED
 restored sustained bidirectional audio on that build.
 
 The same BT1 post-ESTABLISHED transform is present in the deterministic APK
-currently used by the crDroid port, but an incoming VoWiFi call there has
-reproduced the earlier bidirectional-silence and automatic-disconnect symptom.
-BT1 is therefore a required reproduced input, not proof that incoming VoWiFi
-media works on every Android 13 ROM. The crDroid result requires its own
-runtime diagnosis before support can be claimed.
+used by the crDroid port. That port additionally needs Samsung's slot audio
+path to be requested after Telecom enters `MODE_IN_CALL`; requesting SAE only
+from BT1 occurred too early on that ROM. Telecom commit `66d3d91d` adds a
+default-disabled callback, and this device tree enables it and grants the
+required `secims` service lookup in commit `29fc1533`. The user validated an
+outgoing 188 call and an incoming VoWiFi call with audible media and normal
+teardown on the resulting crDroid build. BT1 remains a required reproduced
+input, not proof that incoming VoWiFi works without ROM-specific integration.
 
 This remains a scoped result. Emergency calling, ViLTE, inter-RAT handover,
 alternate audio devices, concurrent dual-SIM operation, other stock
