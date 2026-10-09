@@ -23,3 +23,5 @@ sys.default.data.phoneid u:object_r:m11q_epdg_default_data_prop:s0 exact string
 # stock `currenMno` spelling.
 ril.epdg.currenMno u:object_r:m11q_epdg_radio_prop:s0 exact string
 ril.epdg.resetThrottle u:object_r:m11q_epdg_radio_prop:s0 exact string
+
+ro.m11q.ims_seh_apn_bridge u:object_r:m11q_seh_trial_prop:s0 exact bool

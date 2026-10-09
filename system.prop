@@ -11,3 +11,10 @@ persist.backup.ntpServer=0.pool.ntp.org
 ro.vendor.qti.va_aosp.support=1
 
 ro.multisim.simslotcount=2
+
+# LEG1 trial: modem-led IWLAN; requires a full reboot.
+ro.telephony.iwlan_operation_mode=legacy
+ro.m11q.ims_trial=legacy-r1
+
+# SEH1 opt-in stock APN callback restoration, slot0, all operators.
+ro.m11q.ims_seh_apn_bridge=true

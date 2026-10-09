@@ -20,3 +20,6 @@ system_internal_prop(m11q_epdg_default_data_prop)
 # Exact Samsung ePDG state properties shared with the telephony HAL.
 system_public_prop(m11q_epdg_radio_prop)
 get_prop(hal_telephony_server, m11q_epdg_radio_prop)
+
+# SEH1 exact read-only trial property.
+system_internal_prop(m11q_seh_trial_prop)
