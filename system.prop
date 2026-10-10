@@ -16,5 +16,5 @@ ro.multisim.simslotcount=2
 ro.telephony.iwlan_operation_mode=legacy
 ro.m11q.ims_trial=legacy-r1
 
-# SEH1 opt-in stock APN callback restoration, slot0, all operators.
+# SEH1 opt-in stock APN callback restoration, single active SIM in either slot, all operators.
 ro.m11q.ims_seh_apn_bridge=true

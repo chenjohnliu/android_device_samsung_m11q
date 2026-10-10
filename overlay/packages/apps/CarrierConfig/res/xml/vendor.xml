@@ -1,15 +1,10 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <!-- Generated global stock-profile policy; no country filter or wildcard WFC enable. -->
 <carrier_config_list>
-    <!-- Retain the historical Taiwan framework fresh-bearer policy. Active
-         calls use stock modem-led legacy IWLAN; no policy copied abroad. -->
+    <!-- Obsolete Taiwan framework IWLAN-to-EUTRAN blocking rules removed. -->
     <carrier_config mcc="466" mnc="01">
         <boolean name="carrier_wfc_ims_available_bool" value="true"/>
         <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
-        <string-array name="iwlan_handover_policy_string_array" num="2">
-            <item value="source=IWLAN, target=EUTRAN, type=disallowed, capabilities=IMS"/>
-            <item value="source=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, target=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, type=allowed"/>
-        </string-array>
         <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
@@ -17,10 +12,6 @@
     <carrier_config mcc="466" mnc="05">
         <boolean name="carrier_wfc_ims_available_bool" value="true"/>
         <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
-        <string-array name="iwlan_handover_policy_string_array" num="2">
-            <item value="source=IWLAN, target=EUTRAN, type=disallowed, capabilities=IMS"/>
-            <item value="source=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, target=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, type=allowed"/>
-        </string-array>
         <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
@@ -28,10 +19,6 @@
     <carrier_config mcc="466" mnc="92">
         <boolean name="carrier_wfc_ims_available_bool" value="true"/>
         <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
-        <string-array name="iwlan_handover_policy_string_array" num="2">
-            <item value="source=IWLAN, target=EUTRAN, type=disallowed, capabilities=IMS"/>
-            <item value="source=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, target=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, type=allowed"/>
-        </string-array>
         <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
@@ -42,10 +29,6 @@
         <boolean name="m11q_active_call_w2l_handover_bool" value="false"/>
         <boolean name="carrier_wfc_ims_available_bool" value="true"/>
         <boolean name="carrier_default_wfc_ims_enabled_bool" value="false"/>
-        <string-array name="iwlan_handover_policy_string_array" num="2">
-            <item value="source=IWLAN, target=EUTRAN, type=disallowed, capabilities=IMS"/>
-            <item value="source=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, target=GERAN|UTRAN|EUTRAN|NGRAN|IWLAN, type=allowed"/>
-        </string-array>
         <string name="carrier_data_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_network_service_wlan_package_override_string">com.sec.epdg</string>
         <string name="carrier_qualified_networks_service_package_override_string">com.sec.epdg</string>
