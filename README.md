@@ -1,29 +1,39 @@
-Device tree for the Samsung Galaxy M11 (SM-M115F / m11q)
-=================================================
+# Samsung Galaxy M11 — community ROMs
 
-Status: Booted on CherishOS 4.12 / Android 13.
+Unofficial Android 13 builds for Samsung Galaxy M11 (`SM-M115F`, `m11q`).
 
-## IMS status
+## Downloads
 
-The current `m11q-volte` branch integrates the M115F CWK3 Samsung IMS
-stack through a source-only compatibility layer. With one active subscription
-at a time, the tested scope includes:
+| ROM | Current release |
+| --- | --- |
+| CherishOS 4.12 Vanilla | [2026-10-12 release](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261012-13-Cherish) |
+| crDroid 9.20 | [2026-10-10 release tag](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261010-13-CrDroid) |
 
-- SIM1 and SIM2 IMS registration, VoLTE and SMS;
-- outgoing and incoming VoLTE with bidirectional audio and normal teardown;
-- outgoing Taiwan Mobile VoWiFi to 188 with audible service audio;
-- incoming Taiwan Mobile VoWiFi with sustained bidirectional audio after the
-  Stage 3 post-ESTABLISHED media fix;
-- SIM1 removal/reinsertion recovery for the validated VoLTE/SMS baseline.
+Download the ROM ZIP from the release's **Assets** section; the automatically generated source archives are not flashable ROMs. Each release contains its installation instructions and validation scope.
 
-Concurrent dual-SIM operation, emergency IMS calling, ViLTE, inter-RAT
-handover, other carriers and other stock builds remain unverified. Samsung's
-existing behavior that may reset the Wi-Fi Calling preference after a SIM
-identity change is intentionally retained.
+## Features and validation
 
-Implementation details and proprietary-payload boundaries are documented in
-[`ims/README.md`](ims/README.md). Samsung APK/JAR/ELF payloads are not intended
-for publication in this repository.
+The current CherishOS release includes Samsung stock-derived IMS compatibility, VoLTE/VoWiFi, the Android IMS SMS bridge, restricted microG signature spoofing, the Jelly browser, and optional FBE enable/disable packages.
+
+The maintainer validated SMS sending and receiving, microG Self-Check, VoLTE/VoWiFi calls with one active SIM in each slot separately, and Wi-Fi/LTE handovers. Weak Wi-Fi signal handover preserved the call; returning to VoWiFi took approximately two minutes in the tested scenario. Concurrent dual-SIM IMS is not supported; end-to-end emergency calling remains unvalidated. See the release notes for the full scope and limitations.
+
+## Fixes and release history
+
+- [Cumulative changelog](CHANGELOG.md): the development history, including FM Radio, FBE/recovery, IMS, audio routing, SMS, VoWiFi and microG changes.
+- [Archived release notes](docs/release-history/README.md): the complete original notes and attachment metadata for ten retired CherishOS releases. Historical validation statements belong to their original versions.
+- [Samsung M11 IMS compatibility layer](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer): public patches, integration documentation and validation scope.
+
+The Releases page retains the current CherishOS and crDroid downloads. Older release notes remain in the archive and their Git tags remain available; the old release ZIPs are no longer hosted there.
+
+## Installation and data encryption
+
+When switching ROMs, back up your data and use **TWRP → Wipe → Format Data → `yes`**. A normal Wipe alone can leave incompatible encryption state. Formatting erases internal storage.
+
+CherishOS's current release includes `Enable_FBE.zip` and `Disable_FBE.zip`. Use only the package matching your intended encryption setting, never both. Changing between FBE and DFE requires Format Data. Follow the release-specific recovery instructions; do not assume the CherishOS add-ons also work with crDroid.
+
+## IMS implementation
+
+The `m11q-volte` branch integrates the M115F CWK3 Samsung IMS stack through a source-only compatibility layer. Implementation details and proprietary-payload boundaries are documented in [`ims/README.md`](ims/README.md). Samsung APK/JAR/ELF payloads are not intended for publication in this repository.
 
 ## Device Specifications
 
