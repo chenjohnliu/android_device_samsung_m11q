@@ -118,7 +118,7 @@ The patched `imsservice.apk` is generated locally from hash-pinned stock inputs
 by the public
 [`Samsung-m11-ims-compat-layer`](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer)
 builder. Stage 3 BT1 was added by compatibility-layer commit
-[`a9473bf`](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer/commit/a9473bf933fc6b3026c9c7356cece6d45e86f936).
+[`a7ce843`](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer/commit/a7ce8435ac51cd5af6a7710761780a19f037a626).
 The expected current aligned unsigned output is:
 
 ```text
