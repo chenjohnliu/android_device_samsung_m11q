@@ -13,9 +13,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_m11q.mk
+    $(LOCAL_DIR)/cherish_m11q.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_m11q-userdebug \
-    lineage_m11q-eng \
-    lineage_m11q-user
+    cherish_m11q-userdebug \
+    cherish_m11q-eng \
+    cherish_m11q-user
