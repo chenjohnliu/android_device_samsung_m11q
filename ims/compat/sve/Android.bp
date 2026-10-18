@@ -1,0 +1,26 @@
+cc_library_shared {
+    name: "libm11q_sve_compat",
+    srcs: ["m11q_sve_compat.cpp"],
+    compile_multilib: "32",
+    cpp_std: "gnu++17",
+    stl: "libc++",
+    cflags: [
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
+    header_libs: ["libmedia_headers"],
+    shared_libs: [
+        "framework-permission-aidl-cpp",
+        "libaudioclient",
+        "libgui",
+        "liblog",
+        "libutils",
+    ],
+}
+
+cc_library_shared {
+    name: "lib_android_FrameCapture",
+    srcs: ["m11q_framecapture_stub.c"],
+    compile_multilib: "32",
+    stl: "none",
+}

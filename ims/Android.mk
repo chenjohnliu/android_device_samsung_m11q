@@ -297,6 +297,7 @@ LOCAL_MULTILIB := 32
 LOCAL_DEX_PREOPT := false
 LOCAL_OPTIONAL_USES_LIBRARIES := svemanager
 LOCAL_ENFORCE_USES_LIBRARIES := false
+LOCAL_JNI_SHARED_LIBRARIES := libm11q_sve_compat lib_android_FrameCapture
 LOCAL_PREBUILT_JNI_LIBS := \
     proprietary/app/sveservice/lib/arm/libAudioFWInterface.so \
     proprietary/app/sveservice/lib/arm/libAudioTranscoder.so \
@@ -305,12 +306,10 @@ LOCAL_PREBUILT_JNI_LIBS := \
     proprietary/app/sveservice/lib/arm/libSRTP.so \
     proprietary/app/sveservice/lib/arm/libSTE.so \
     proprietary/app/sveservice/lib/arm/libSamsungAPVoiceEngine.so \
-    proprietary/app/sveservice/lib/arm/lib_android_FrameCapture.so \
     proprietary/app/sveservice/lib/arm/libamrnb_float.so \
     proprietary/app/sveservice/lib/arm/libamrwb_float.so \
     proprietary/app/sveservice/lib/arm/libevs_float.so \
     proprietary/app/sveservice/lib/arm/libfloatingfeature.so \
-    proprietary/app/sveservice/lib/arm/libm11q_sve_compat.so \
     proprietary/app/sveservice/lib/arm/libmediarelayengine.so \
     proprietary/app/sveservice/lib/arm/libnativecfms.so \
     proprietary/app/sveservice/lib/arm/libresampler_ims.so \
