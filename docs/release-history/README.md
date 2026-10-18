@@ -1,6 +1,6 @@
-# CherishOS release history
+# ROM release history
 
-This directory preserves the original release notes for ten superseded CherishOS releases. The notes are retained as historical records; their validation statements describe only the tested setup at the time each release was published.
+This directory preserves the original release notes for superseded CherishOS and crDroid releases. The notes are retained as historical records; their validation statements describe only the tested setup at the time each release was published.
 
 The corresponding source tree remains available by tag. Release ZIP attachments are no longer provided here. The GitHub-generated source archives are source snapshots, not ROM packages.
 
@@ -16,3 +16,5 @@ The corresponding source tree remains available by tag. Release ZIP attachments 
 | 2026-09-10 09:22 (UTC+08:00) | Cherish-OS-v4.12-20260909-1654-m11q-UNOFFICIAL-Vanilla-signed | [tree/20260910-13-rc1](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/20260910-13-rc1) | [20260910-13-rc1.md](20260910-13-rc1.md) |
 | 2026-09-12 21:34 (UTC+08:00) | Cherish-OS-v4.12-20260912-0953-m11q-UNOFFICIAL-Vanilla-signed | [tree/20260912-13](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/20260912-13) | [20260912-13.md](20260912-13.md) |
 | 2026-09-26 17:26 (UTC+08:00) | Cherish-OS-v4.12-20260926-0634-m11q-UNOFFICIAL-Vanilla-signed | [tree/20260926-13-Cherish](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/20260926-13-Cherish) | [20260926-13-Cherish.md](20260926-13-Cherish.md) |
+| 2026-10-11 01:04 (UTC+08:00) | crDroidAndroid-13.0-20261011-m11q-v9.20 | [tree/20261010-13-CrDroid](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/20261010-13-CrDroid) | [20261010-13-CrDroid.md](20261010-13-CrDroid.md) |
+| 2026-10-13 00:34 (UTC+08:00) | Cherish-OS-v4.12-20261012-1416-m11q-UNOFFICIAL-Vanilla | [tree/20261012-13-Cherish](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/20261012-13-Cherish) | [20261012-13-Cherish.md](20261012-13-Cherish.md) |

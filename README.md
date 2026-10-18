@@ -6,21 +6,21 @@ Unofficial Android 13 builds for Samsung Galaxy M11 (`SM-M115F`, `m11q`).
 
 | ROM | Current release |
 | --- | --- |
-| CherishOS 4.12 Vanilla | [2026-10-12 release](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261012-13-Cherish) |
-| crDroid 9.20 | [2026-10-10 release tag](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261010-13-CrDroid) |
+| CherishOS 4.12 Vanilla | [2026-10-17 release](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261017-13-Cherish) |
+| crDroid 9.20 | [2026-10-18 release](https://github.com/chenjohnliu/android_device_samsung_m11q/releases/tag/20261018-13-CrDroid) |
 
 Download the ROM ZIP from the release's **Assets** section; the automatically generated source archives are not flashable ROMs. Each release contains its installation instructions and validation scope.
 
 ## Features and validation
 
-The current CherishOS release includes Samsung stock-derived IMS compatibility, VoLTE/VoWiFi, the Android IMS SMS bridge, restricted microG signature spoofing, the Jelly browser, and optional FBE enable/disable packages.
+Both current ROMs include VoLTE, Wi-Fi Calling, SMS and microG compatibility. CherishOS Vanilla also includes the Jelly browser. Read each release for its cumulative improvements, installation steps and remaining limits.
 
-The maintainer validated SMS sending and receiving, microG Self-Check, VoLTE/VoWiFi calls with one active SIM in each slot separately, and Wi-Fi/LTE handovers. Weak Wi-Fi signal handover preserved the call; returning to VoWiFi took approximately two minutes in the tested scenario. Concurrent dual-SIM IMS is not supported; end-to-end emergency calling remains unvalidated. See the release notes for the full scope and limitations.
+The documented phone checks cover SMS sending and receiving, VoLTE/VoWiFi calls in each SIM slot separately, and Wi-Fi/LTE switching. CherishOS also passed microG Self-Check. Tests use one active IMS subscription, and handover timing can vary. Concurrent dual-SIM IMS is not supported; emergency calling remains unvalidated. See each release for its exact scope.
 
 ## Fixes and release history
 
 - [Cumulative changelog](CHANGELOG.md): the development history, including FM Radio, FBE/recovery, IMS, audio routing, SMS, VoWiFi and microG changes.
-- [Archived release notes](docs/release-history/README.md): the complete original notes and attachment metadata for ten retired CherishOS releases. Historical validation statements belong to their original versions.
+- [Archived release notes](docs/release-history/README.md): the original notes and attachment metadata for retired CherishOS and crDroid releases. Historical validation statements belong to their original versions.
 - [Samsung M11 IMS compatibility layer](https://github.com/chenjohnliu/Samsung-m11-ims-compat-layer): public patches, integration documentation and validation scope.
 
 The Releases page retains the current CherishOS and crDroid downloads. Older release notes remain in the archive and their Git tags remain available; the old release ZIPs are no longer hosted there.
@@ -29,7 +29,7 @@ The Releases page retains the current CherishOS and crDroid downloads. Older rel
 
 When switching ROMs, back up your data and use **TWRP → Wipe → Format Data → `yes`**. A normal Wipe alone can leave incompatible encryption state. Formatting erases internal storage.
 
-CherishOS's current release includes `Enable_FBE.zip` and `Disable_FBE.zip`. Use only the package matching your intended encryption setting, never both. Changing between FBE and DFE requires Format Data. Follow the release-specific recovery instructions; do not assume the CherishOS add-ons also work with crDroid.
+The current releases include optional `Enable_FBE.zip` and `Disable_FBE.zip` add-ons. Never flash both. Changing between FBE and DFE requires Format Data. These add-ons have not been separately validated with the latest builds; follow the individual release notes and recovery requirements.
 
 ## IMS implementation
 
