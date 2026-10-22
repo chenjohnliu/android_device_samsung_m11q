@@ -4,6 +4,7 @@ vendor.samsung.hardware.miscpower::ISehMiscPower	u:object_r:hal_miscpower_hwserv
 vendor.samsung.hardware.vibrator::ISehVibrator		u:object_r:hal_vibrator_hwservice:s0
 vendor.focaltech.fingerprint::IFocalFingerprintService		u:object_r:ff_hwservice:s0
 vendor.silead.hardware.fingerprintext::ISileadFingerprint	u:object_r:hal_fingerprint_hwservice:s0
+vendor.egistec.hardware.fingerprint::IBiometricsFingerprintRbs	u:object_r:hal_fingerprint_hwservice:s0
 vendor.samsung.hardware.radio::ISehRadio			u:object_r:hal_telephony_hwservice:s0
 vendor.samsung.hardware.radio.channel::ISehChannel	u:object_r:hal_telephony_hwservice:s0
 vendor.samsung.hardware.radio.bridge::ISehBridge	u:object_r:hal_telephony_hwservice:s0

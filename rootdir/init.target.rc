@@ -84,6 +84,8 @@ on post-fs-data
 #Create folder for fingerprint
     mkdir /data/vendor/focaltech 0770 system system
     restorecon /data/vendor/focaltech
+    mkdir /data/vendor/cdfinger 0770 system system
+    restorecon_recursive /data/vendor/cdfinger
 #HS70 code for HS70-26/HS70-161 by zhuqiang at 2019/10/11 end
 
 on early-boot

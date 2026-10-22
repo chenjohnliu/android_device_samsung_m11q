@@ -9,6 +9,12 @@ allow hal_fingerprint_default silead_fpd_device:chr_file rw_file_perms;
 allow hal_fingerprint_default silead_fpd_data_file:dir create_dir_perms;
 allow hal_fingerprint_default silead_fpd_data_file:file create_file_perms;
 
+# CDFinger and Egis device access
+allow hal_fingerprint_default cdfinger_device:chr_file rw_file_perms;
+allow hal_fingerprint_default egis_fp_device:chr_file rw_file_perms;
+allow hal_fingerprint_default cdfinger_data_file:dir create_dir_perms;
+allow hal_fingerprint_default cdfinger_data_file:file create_file_perms;
+
 # TrustZone / ion
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 allow hal_fingerprint_default ion_device:chr_file rw_file_perms;

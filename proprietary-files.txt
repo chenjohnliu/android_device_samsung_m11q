@@ -2666,6 +2666,9 @@ vendor/lib/vendor.silead.hardware.fingerprintext@1.0.so
 vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
 vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
 vendor/lib/hw/fingerprint.focaltech.default.so
+vendor/lib/hw/cdfinger.fingerprint.default.so
+vendor/lib/hw/fingerprint.egis.default.so
+vendor/lib/vendor.egistec.hardware.fingerprint@4.0.so
 vendor/bin/hw/vendor.focaltech.fingerprint@1.0-service
 vendor/etc/init/vendor.focaltech.fingerprint@1.0-service.rc
 
