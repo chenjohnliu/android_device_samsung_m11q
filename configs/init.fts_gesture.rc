@@ -1,2 +1,5 @@
+# All four supported SPI touchscreen drivers expose this Samsung command.
+# Set the desired state explicitly; do not use ILITEK's gesture toggle.
 on boot
-    write /sys/devices/platform/soc/78b7000.spi/spi_master/spi3/spi3.1/fts_gesture_mode 1
+    wait /sys/class/sec/tsp/cmd 5
+    write /sys/class/sec/tsp/cmd aot_enable,1
