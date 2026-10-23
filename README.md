@@ -1,3 +1,7 @@
+> **No longer maintained**
+>
+> This branch is no longer maintained and is kept for historical reference. Use [`m11q-volte`](https://github.com/chenjohnliu/android_device_samsung_m11q/tree/m11q-volte) for current development.
+
 Device tree for the Samsung Galaxy M11 (SM-M115F / m11q)
 =================================================
 
