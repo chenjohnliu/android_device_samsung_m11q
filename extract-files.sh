@@ -26,6 +26,9 @@ source "${HELPER}"
 
 function blob_fixup() {
     case "${1}" in
+        vendor/bin/hw/android.hardware.nfc@1.1-service|vendor/lib/nfc_nci_nxp.so)
+            python3 "${MY_DIR}/blob-fixups/nfc-mifare.py" "${1}" "${2}"
+            ;;
         vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service|vendor/lib/hw/cdfinger.fingerprint.default.so)
             python3 "${MY_DIR}/blob-fixups/fingerprint-backends.py" "${1}" "${2}"
             ;;

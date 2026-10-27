@@ -323,6 +323,7 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     libnfc-nci \
     libnfc_nci_jni \
+    libshim_nfc_m11q \
     NfcNci \
     SecureElement \
     Tag \
